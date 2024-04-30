@@ -9,10 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class EmployeeRepositoryTest {
+class EmployeeRepositoryTest {
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -20,7 +19,7 @@ public class EmployeeRepositoryTest {
     // JUnit test for save employee operation
     //@DisplayName("JUnit test for save employee operation")
     @Test
-    public void givenEmployeeObject_whenSave_thenReturnSavedEmployee(){
+    void givenEmployeeObject_whenSave_thenReturnSavedEmployee() {
 
         //given - precondition or setup
         Employee employee = Employee.builder()
@@ -33,14 +32,14 @@ public class EmployeeRepositoryTest {
 
         // then - verify the output
         assertThat(savedEmployee).isNotNull();
-        assertThat(savedEmployee.getId()).isGreaterThan(0);
+        assertThat(savedEmployee.getId()).isPositive();
     }
 
 
     // JUnit test for get all employees operation
     @DisplayName("JUnit test for get all employees operation")
     @Test
-    public void givenEmployeesList_whenFindAll_thenEmployeesList(){
+    void givenEmployeesList_whenFindAll_thenEmployeesList() {
         // given - precondition or setup
         Employee employee = Employee.builder()
                 .firstName("Ramesh")
@@ -61,15 +60,14 @@ public class EmployeeRepositoryTest {
         List<Employee> employeeList = employeeRepository.findAll();
 
         // then - verify the output
-        assertThat(employeeList).isNotNull();
-        assertThat(employeeList.size()).isEqualTo(2);
+        assertThat(employeeList).isNotNull().hasSize(2);
 
     }
 
     // JUnit test for get employee by id operation
     @DisplayName("JUnit test for get employee by id operation")
     @Test
-    public void givenEmployeeObject_whenFindById_thenReturnEmployeeObject(){
+    void givenEmployeeObject_whenFindById_thenReturnEmployeeObject() {
         // given - precondition or setup
         Employee employee = Employee.builder()
                 .firstName("Ramesh")
@@ -88,7 +86,7 @@ public class EmployeeRepositoryTest {
     // JUnit test for get employee by email operation
     @DisplayName("JUnit test for get employee by email operation")
     @Test
-    public void givenEmployeeEmail_whenFindByEmail_thenReturnEmployeeObject(){
+    void givenEmployeeEmail_whenFindByEmail_thenReturnEmployeeObject() {
         // given - precondition or setup
         Employee employee = Employee.builder()
                 .firstName("Ramesh")
@@ -107,7 +105,7 @@ public class EmployeeRepositoryTest {
     // JUnit test for update employee operation
     @DisplayName("JUnit test for update employee operation")
     @Test
-    public void givenEmployeeObject_whenUpdateEmployee_thenReturnUpdatedEmployee(){
+    void givenEmployeeObject_whenUpdateEmployee_thenReturnUpdatedEmployee() {
         // given - precondition or setup
         Employee employee = Employee.builder()
                 .firstName("Ramesh")
@@ -130,7 +128,7 @@ public class EmployeeRepositoryTest {
     // JUnit test for delete employee operation
     @DisplayName("JUnit test for delete employee operation")
     @Test
-    public void givenEmployeeObject_whenDelete_thenRemoveEmployee(){
+    void givenEmployeeObject_whenDelete_thenRemoveEmployee() {
         // given - precondition or setup
         Employee employee = Employee.builder()
                 .firstName("Ramesh")
@@ -150,7 +148,7 @@ public class EmployeeRepositoryTest {
     // JUnit test for custom query using JPQL with index
     @DisplayName("JUnit test for custom query using JPQL with index")
     @Test
-    public void givenFirstNameAndLastName_whenFindByJPQL_thenReturnEmployeeObject(){
+    void givenFirstNameAndLastName_whenFindByJPQL_thenReturnEmployeeObject() {
         // given - precondition or setup
         Employee employee = Employee.builder()
                 .firstName("Ramesh")
@@ -171,7 +169,7 @@ public class EmployeeRepositoryTest {
     // JUnit test for custom query using JPQL with Named params
     @DisplayName("JUnit test for custom query using JPQL with Named params")
     @Test
-    public void givenFirstNameAndLastName_whenFindByJPQLNamedParams_thenReturnEmployeeObject(){
+    void givenFirstNameAndLastName_whenFindByJPQLNamedParams_thenReturnEmployeeObject() {
         // given - precondition or setup
         Employee employee = Employee.builder()
                 .firstName("Ramesh")
@@ -192,7 +190,7 @@ public class EmployeeRepositoryTest {
     // JUnit test for custom query using native SQL with index
     @DisplayName("JUnit test for custom query using native SQL with index")
     @Test
-    public void givenFirstNameAndLastName_whenFindByNativeSQL_thenReturnEmployeeObject(){
+    void givenFirstNameAndLastName_whenFindByNativeSQL_thenReturnEmployeeObject() {
         // given - precondition or setup
         Employee employee = Employee.builder()
                 .firstName("Ramesh")
@@ -213,7 +211,7 @@ public class EmployeeRepositoryTest {
     // JUnit test for custom query using native SQL with named params
     @DisplayName("JUnit test for custom query using native SQL with named params")
     @Test
-    public void givenFirstNameAndLastName_whenFindByNativeSQLNamedParams_thenReturnEmployeeObject(){
+    void givenFirstNameAndLastName_whenFindByNativeSQLNamedParams_thenReturnEmployeeObject() {
         // given - precondition or setup
         Employee employee = Employee.builder()
                 .firstName("Ramesh")
