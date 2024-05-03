@@ -8,9 +8,6 @@ import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
-    Employee save(Employee employee);
-
-    Optional<Employee> findById(long id);
     Optional<Employee> findByEmail(String email);
     // define custom query using JPQL with index params
     @Query("select e from Employee e where e.firstName = ?1 and e.lastName = ?2")
