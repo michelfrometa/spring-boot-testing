@@ -44,7 +44,7 @@ class EmployeeServiceTest {
 
     @DisplayName("Junit Test for getAllEmployees method")
     @Test
-    void givenEmployeeList_whenGetAllEmployees_thenReturnEmployeeList() {
+    void givenEmployeeList_whenGetAll_thenReturnEmployeeList() {
 
         Employee employee1 = Employee.builder()
                 .id(2L)
@@ -55,7 +55,7 @@ class EmployeeServiceTest {
 
         BDDMockito.given(employeeRepository.findAll()).willReturn(List.of(employee, employee1));
 
-        List<EmployeeDto> employeeDtos = employeeService.getAllEmployees();
+        List<EmployeeDto> employeeDtos = employeeService.getAll();
 
         Assertions.assertNotNull(employeeDtos);
         Assertions.assertEquals(2, employeeDtos.size());
@@ -63,11 +63,11 @@ class EmployeeServiceTest {
 
     @DisplayName("Junit Test for getAllEmployees method (negative scenario)")
     @Test
-    void givenEmptyEmployeeList_whenGetAllEmployees_thenReturnEmptyEmployeeList() {
+    void givenEmptyEmployeeList_whenGetAll_thenReturnEmptyEmployeeList() {
 
         BDDMockito.given(employeeRepository.findAll()).willReturn(Collections.emptyList());
 
-        List<EmployeeDto> employeeDtos = employeeService.getAllEmployees();
+        List<EmployeeDto> employeeDtos = employeeService.getAll();
 
         Assertions.assertTrue(employeeDtos.isEmpty());
     }
@@ -77,7 +77,7 @@ class EmployeeServiceTest {
     void givenId_whenGetByid_thenReturnEmployee() {
         BDDMockito.given(employeeRepository.findById(anyLong())).willReturn(Optional.of(employee));
 
-        EmployeeDto existing = employeeService.getEmployee(1L);
+        EmployeeDto existing = employeeService.getById(1L);
 
         Assertions.assertNotNull(existing);
     }
@@ -87,18 +87,18 @@ class EmployeeServiceTest {
     void givenId_whenGetByid_thenReturnNull() {
         BDDMockito.given(employeeRepository.findById(anyLong())).willReturn(Optional.empty());
 
-        EmployeeDto existing = employeeService.getEmployee(1L);
+        EmployeeDto existing = employeeService.getById(1L);
 
         Assertions.assertNull(existing);
     }
 
     @DisplayName("Junit Test for createEmployee method")
     @Test
-    void givenEmployee_whenCreateEmployee_thenReturnEmployee() {
+    void givenEmployee_whenCreateEmployee_thenReturn() {
         BDDMockito.given(employeeRepository.save(any())).willReturn(employee);
         CreateEmployeeDto createEmployeeDto = CREATE_EMPLOYEE_DTO_MAPPER.toDto(employee);
 
-        EmployeeDto savedEmployee = employeeService.createEmployee(createEmployeeDto);
+        EmployeeDto savedEmployee = employeeService.create(createEmployeeDto);
 
         Assertions.assertNotNull(savedEmployee);
     }

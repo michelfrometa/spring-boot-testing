@@ -25,7 +25,7 @@ public class EmployeeService {
      *
      * @return A {@link List}<{@link EmployeeDto}> representing all employees. If no employees are found, returns an empty list.
      */
-    public List<EmployeeDto> getAllEmployees() {
+    public List<EmployeeDto> getAll() {
         return Optional.of(employeeRepository.findAll())
                 .map(EMPLOYEE_DTO_MAPPER::toDtoList)
                 .orElseGet(Collections::emptyList);
@@ -37,7 +37,7 @@ public class EmployeeService {
      * @param id {@link Long} the ID of the employee to retrieve.
      * @return an {@link EmployeeDto} object representing the employee, or null if the employee is not found.
      */
-    public EmployeeDto getEmployee(Long id) {
+    public EmployeeDto getById(Long id) {
         return employeeRepository.findById(id)
                 .map(EMPLOYEE_DTO_MAPPER::toDto)
                 .orElse(null);
@@ -49,7 +49,7 @@ public class EmployeeService {
      * @param employeeDto {@link CreateEmployeeDto} the data transfer object containing the details of the employee to create.
      * @return an {@link EmployeeDto} object representing the newly created employee, or null if the creation was unsuccessful.
      */
-    public EmployeeDto createEmployee(CreateEmployeeDto employeeDto) {
+    public EmployeeDto create(CreateEmployeeDto employeeDto) {
         return Optional.of(employeeDto)
                 .map(CREATE_EMPLOYEE_DTO_MAPPER::toEntity)
                 .map(employeeRepository::save)
