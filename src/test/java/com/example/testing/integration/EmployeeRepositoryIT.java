@@ -1,9 +1,12 @@
-package com.example.testing.domain.employee;
+package com.example.testing.integration;
 
+import com.example.testing.domain.employee.Employee;
+import com.example.testing.domain.employee.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
@@ -12,7 +15,8 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-class EmployeeRepositoryTest {
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+class EmployeeRepositoryIT extends AbstractContainerBaseTest {
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -28,8 +32,7 @@ class EmployeeRepositoryTest {
                 .build();
     }
 
-    // JUnit test for save employee operation
-    //@DisplayName("JUnit test for save employee operation")
+    @DisplayName("JUnit test for save employee operation")
     @Test
     void givenEmployeeObject_whenSave_thenReturnSavedEmployee() {
 
@@ -42,7 +45,6 @@ class EmployeeRepositoryTest {
     }
 
 
-    // JUnit test for get all employees operation
     @DisplayName("JUnit test for get all employees operation")
     @Test
     void givenEmployeesList_whenFindAll_thenEmployeesList() {
@@ -65,7 +67,6 @@ class EmployeeRepositoryTest {
 
     }
 
-    // JUnit test for get employee by id operation
     @DisplayName("JUnit test for get employee by id operation")
     @Test
     void givenEmployeeObject_whenFindById_thenReturnEmployeeObject() {
@@ -79,7 +80,6 @@ class EmployeeRepositoryTest {
         assertThat(employeeDB).isNotNull();
     }
 
-    // JUnit test for get employee by email operation
     @DisplayName("JUnit test for get employee by email operation")
     @Test
     void givenEmployeeEmail_whenFindByEmail_thenReturnEmployeeObject() {
@@ -93,7 +93,6 @@ class EmployeeRepositoryTest {
         assertThat(employeeDB).isNotNull();
     }
 
-    // JUnit test for update employee operation
     @DisplayName("JUnit test for update employee operation")
     @Test
     void givenEmployeeObject_whenUpdateEmployee_thenReturnUpdatedEmployee() {
@@ -111,7 +110,6 @@ class EmployeeRepositoryTest {
         assertThat(updatedEmployee.getFirstName()).isEqualTo("Ram");
     }
 
-    // JUnit test for delete employee operation
     @DisplayName("JUnit test for delete employee operation")
     @Test
     void givenEmployeeObject_whenDelete_thenRemoveEmployee() {
@@ -126,7 +124,6 @@ class EmployeeRepositoryTest {
         assertThat(employeeOptional).isEmpty();
     }
 
-    // JUnit test for custom query using JPQL with index
     @DisplayName("JUnit test for custom query using JPQL with index")
     @Test
     void givenFirstNameAndLastName_whenFindByJPQL_thenReturnEmployeeObject() {
@@ -142,7 +139,6 @@ class EmployeeRepositoryTest {
         assertThat(savedEmployee).isNotNull();
     }
 
-    // JUnit test for custom query using JPQL with Named params
     @DisplayName("JUnit test for custom query using JPQL with Named params")
     @Test
     void givenFirstNameAndLastName_whenFindByJPQLNamedParams_thenReturnEmployeeObject() {
@@ -158,7 +154,6 @@ class EmployeeRepositoryTest {
         assertThat(savedEmployee).isNotNull();
     }
 
-    // JUnit test for custom query using native SQL with index
     @DisplayName("JUnit test for custom query using native SQL with index")
     @Test
     void givenFirstNameAndLastName_whenFindByNativeSQL_thenReturnEmployeeObject() {
@@ -174,7 +169,6 @@ class EmployeeRepositoryTest {
         assertThat(savedEmployee).isNotNull();
     }
 
-    // JUnit test for custom query using native SQL with named params
     @DisplayName("JUnit test for custom query using native SQL with named params")
     @Test
     void givenFirstNameAndLastName_whenFindByNativeSQLNamedParams_thenReturnEmployeeObject() {
